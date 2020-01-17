@@ -1,0 +1,42 @@
+<h1>Add New Advertisement.</h1>
+<%= form_with scope: :farmer_instrument, url: farmer_instruments_path,local: true do |form| %>
+  <p>
+    <%= form.label :farmer_id %><br>
+    <%= form.select(:farmer_id,@farmer_list, :prompt => "Select Farmer")%>
+  </p>
+
+  <p>
+    <%= form.label :instrument_id %><br>
+    <%= form.select(:instrument_id,@instrument_list, :prompt => "Select Instrument")%>
+  </p>
+  <p>
+    <%= form.label :rent_per_hour %><br>
+    <%= form.text_field :rent_per_hour %>
+  </p>
+  <p>
+    <%= form.label :deposit %><br>
+    <%= form.text_field :deposit %>
+  </p>
+
+  <p>
+    <%= form.label :is_available %><br>
+    <%= form.text_field :is_available %>
+  </p>
+
+  <p>
+    <%= form.label :available_from %><br>
+    <%= form.date_field :available_from %>
+  </p>
+  <p>
+    <%= form.label :available_to %><br>
+    <%= form.date_field :available_to %>
+  </p>
+
+
+ 
+  
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
