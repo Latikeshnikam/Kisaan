@@ -35,6 +35,8 @@
 		<th>Deposit</th>
 		<th>Rent</th>
 		<th>View Details</th>
+		<th>Edit Details</th>
+		<th>Delete</th>
 	</tr>
 	</thead>
 	<% @adds.each do |ad|%>
@@ -44,6 +46,11 @@
 		<td><%=ad.deposit %></td>
 		<td><%=ad.rent_per_hour %></td>
 		<td><%=link_to 'View Info', farmer_instrument_path(ad.id)%></td>
+		<td><%=link_to 'Edit Info', edit_farmer_instrument_path(ad.id)%></td>
+		<td><%= link_to 'Delete Info', farmer_instrument_path(ad.id),
+             method: :delete,
+             data: { confirm: 'Are You sure?' } %></td>
+
 
 	</tr>
 	<% end %>

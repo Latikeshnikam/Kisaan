@@ -1,14 +1,5 @@
-<h1>Add New Advertisement.</h1>
-<%= form_with scope: :farmer_instrument, url: farmer_instruments_path,local: true , class: "nifty_form" do |form| %>
-  <p>
-    <%= form.label :farmer_id %><br>
-    <%= form.select(:farmer_id,@farmer_list, :prompt => "Select Farmer")%>
-  </p>
-
-  <p>
-    <%= form.label :instrument_id %><br>
-    <%= form.select(:instrument_id,@instrument_list, :prompt => "Select Instrument")%>
-  </p>
+<h1>Edit Advertisement.</h1>
+<%= form_for @edit_form do |form| %>
   <p>
     <%= form.label :rent_per_hour %><br>
     <%= form.text_field :rent_per_hour %>
