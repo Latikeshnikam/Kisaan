@@ -1,0 +1,144 @@
+{
+  "RSpec": {
+    "coverage": {
+      "/home/rubyist/Kisaan/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/helpers/farmer_instruments_helper.rb": [
+        1,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/controllers/farmer_instruments_controller.rb": [
+        1,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        null,
+        1,
+        0,
+        0,
+        null,
+        0,
+        null,
+        null,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/controllers/application_controller.rb": [
+        1,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/models/farmer.rb": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        5,
+        5,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/models/application_record.rb": [
+        1,
+        1,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/models/instrument.rb": [
+        1,
+        1,
+        1,
+        null,
+        null
+      ],
+      "/home/rubyist/Kisaan/app/channels/application_cable/channel.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/channels/application_cable/connection.rb": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/models/address.rb": [
+        0,
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/models/rent.rb": [
+        0,
+        null,
+        0,
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/models/farmer_instrument.rb": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/jobs/application_job.rb": [
+        0,
+        0
+      ],
+      "/home/rubyist/Kisaan/app/mailers/application_mailer.rb": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "timestamp": 1579689945
+  }
+}

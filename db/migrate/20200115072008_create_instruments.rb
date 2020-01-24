@@ -5,7 +5,7 @@ class CreateInstruments < ActiveRecord::Migration[5.2]
     	t.string :brand
     	t.text :specification 
 
-      t.timestamps
+      t.timestamps :null => true
      end
      change_table :instruments do |t|
      	t.rename :name, :instrument_name

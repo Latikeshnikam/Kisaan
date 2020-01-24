@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_01_16_023541) do
   create_table "farmer_instruments", force: :cascade do |t|
     t.integer "farmer_id"
     t.integer "instrument_id"
-    t.integer "rent_per_hour"
+    t.integer "rent_per_hour", null: false
     t.boolean "is_available"
     t.integer "deposit"
     t.date "available_from"
@@ -53,18 +53,18 @@ ActiveRecord::Schema.define(version: 2020_01_16_023541) do
     t.string "brand"
     t.text "specification"
     t.datetime "created_at", null: false
-    t.datetime "updated_at	", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "rents", force: :cascade do |t|
     t.integer "farmer_instrument_id"
-    t.integer "instrument_id"
+    t.integer "farmer_id"
     t.date "from"
     t.date "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["farmer_id"], name: "index_rents_on_farmer_id"
     t.index ["farmer_instrument_id"], name: "index_rents_on_farmer_instrument_id"
-    t.index ["instrument_id"], name: "index_rents_on_instrument_id"
   end
 
 end

@@ -5,8 +5,10 @@ class Farmer < ApplicationRecord
 	has_many :farmer_instruments
 	has_many :farmer_instruments, :through => :rents
 	has_many :instruments, :through => :farmer_instruments
-	#has_many :rented_instruments, through => :rents, class_name: 'Rent', foreign_key: 'farmer_instrument_id'
+	has_many :rented_instruments, :through => :rents, class_name: 'Rent', foreign_key: 'farmer_instrument_id'
 	before_save :titalize_name
+
+	validates :mobile_number, length: {is: 10}, uniqueness: true
 
 	def titalize_name
 		self.first_name = self.first_name.titleize
