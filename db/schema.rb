@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_16_023541) do
+ActiveRecord::Schema.define(version: 2020_01_27_073343) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "line_1"
@@ -52,8 +52,9 @@ ActiveRecord::Schema.define(version: 2020_01_16_023541) do
     t.string "instrument_name"
     t.string "brand"
     t.text "specification"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "image"
   end
 
   create_table "rents", force: :cascade do |t|

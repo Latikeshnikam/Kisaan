@@ -1,0 +1,25 @@
+<h1>Add New Advertisement.</h1>
+<%= form_with scope: :instrument, url: instruments_path,local: true , class: "nifty_form" do |form| %>
+
+  <p>
+    <%= form.label :instrument_name %><br>
+    <%= form.text_field :instrument_name %>
+  </p>
+  <p>
+    <%= form.label :brand %><br>
+    <%= form.text_field :brand %>
+  </p>
+  <p>
+    <%= form.label :specification %><br>
+    <%= form.text_field :specification %>
+  </p>
+
+  <p>
+    <%= form.label :image %><br>
+    <%= form.file_field :image %>
+  </p>
+
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

@@ -24,41 +24,37 @@
 
 </style>
 
-<%=link_to 'Add New Adv', new_farmer_instrument_path%>
+<%=link_to 'Add New Instruments', new_instrument_path%>
 
 <h1 style="color: #5f071d;font-family: 'IM Fell Great Primer SC', serif; text-align: center;">Farmer Instruments</h1>
 <table class="table">
 	<thead class="thead-dark">
 	<tr>
-		<th>Farmer Name</th>
 		<th>Instrument Name</th>
-		<th>Deposit</th>
-		<th>Rent</th>
-		<th>View Details</th>
-		<th>Edit Details</th>
-		<th>Delete</th>
+		<th>Instrument Brand</th>
+		<th>Instrument Specification</th>
+		<th>Instrument Image</th>
+		<th>View</th>
+		<th>Edit</th>
 	</tr>
 	</thead>
 	<% @adds.each do |ad|%>
 	<tr>
-		<td><%=ad.farmer.first_name %></td>
-		<td><%=ad.instrument.instrument_name %></td>
-		<td><%=ad.deposit %></td>
-		<td><%=ad.rent_per_hour %></td>
-		<td><%=link_to 'View Info', farmer_instrument_path(ad.id)%></td>
-		<td><%=link_to 'Edit Info', edit_farmer_instrument_path(ad.id)%></td>
-		<td><%= link_to 'Delete Info', farmer_instrument_path(ad.id),
-             method: :delete,
-             data: { confirm: 'Are You sure?' } %></td>
+		<td><%=ad.instrument_name %></td>
+		<td><%=ad.brand %></td>
+    <td><%=ad.specification %></td>
+		<td><%= image_tag ad.image_url, height: 150, width: 150 %></td>
+		<td><%= link_to 'View Info', instrument_path(ad.id)%></td>
+		<td><%= link_to 'Edit Info', edit_instrument_path(ad.id)%></td>
 
 
 	</tr>
 	<% end %>
-
 </table>
 
-<% if false%>
 
+
+<% if false %>
 <table class="table">
 	<thead class="thead-dark">
 	<tr>

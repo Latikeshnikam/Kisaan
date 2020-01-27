@@ -9,6 +9,7 @@
     <%= form.label :instrument_id %><br>
     <%= form.select(:instrument_id,@instrument_list, :prompt => "Select Instrument")%>
   </p>
+
   <p>
     <%= form.label :rent_per_hour %><br>
     <%= form.text_field :rent_per_hour %>
@@ -31,6 +32,7 @@
     <%= form.label :available_to %><br>
     <%= form.date_field(:available_to) %>
   </p>
+
   <p>
     <%= form.submit %>
   </p>
