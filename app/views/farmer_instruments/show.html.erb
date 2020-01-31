@@ -22,37 +22,121 @@
 		font-family: 'Ubuntu', sans-serif;
 	}
 
+
+		div.card {
+	  width: 250px;
+	  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	  text-align: center;
+		}
+
+
 </style>
 
-<h1 style="color:  #5f071d ;font-family: 'IM Fell Great Primer SC', serif; text-align: center;">Farmer Details</h1>
-<table class="table table-bordered">
-	<thead class="thead-dark">
-	<tr>
-		<th>Farmer Name</th>
-		<th>Instrument Name</th>
-		<th>Instrument Deposit</th>
-		<th>Instruments Availability</th>
-		<th>Instrument Available From</th>
-		<th>Instrument Available Till</th>
-		<th>Instrument Picture</th>
-
-	</tr>
-	</thead>
-	<tr>
-		<td><%= @shows.farmer.full_name %></td>
-		<td><%= @shows.instrument.instrument_name %></td>
-		<td><%= @shows.deposit %></td>
-		<td><%= @shows.is_available %></td>
-		<td><%= @shows.available_from %></td>
-		<td><%= @shows.available_to %></td>
-		<td><%= image_tag @shows.instrument.image_url, width:250, height: 250%></td>
+<!--<h1 style="color:  #5f071d ;font-family: 'IM Fell Great Primer SC', serif; text-align: center;">Instrument Details</h1>
 
 
+-->
+</br> </br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 z-depth-2">
+			<div class="card" style="width: 350px; height: 680px; text-align: center">
+			  <!--<img class="card-img-top" src="..." alt="Card image cap"> -->
+				<%= image_tag @shows.instrument.image_url, width:350, height:200 %>
+			  <div class="card-body">
+			    <h5 class="card-title"><%= @shows.instrument.instrument_name%></h5>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item"><span>Farmer Name </span> <br> <%= @shows.farmer.full_name%></li>
+					<li class="list-group-item"><span>Rent Per Day </span> <br> <%= @shows.rent_per_hour%></li>
+
+			    <li class="list-group-item"><span>Instrument Deposit</span><br> <%= @shows.deposit%></li>
+					<li class="list-group-item"><span>Instrument Availability </span> <br> <%= @shows.is_available%></li>
+					<li class="list-group-item"><span>Available From </span> <br> <%= @shows.available_from%></li>
+					<li class="list-group-item"><span>Available Till </span> <br> <%= @shows.available_to%></li>
+					 <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+					 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+					 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+				</ul>
+
+			</div>
+			<br>
+		</div>
+
+		<div class="col-md-6">
+		</br></br></br></br>
+		<h2 style="font-family: 'Poppins', sans-serif; padding-left: 100px">Rent Now</h2>
+			<div class="card" style="width: 350px; height: 300px; text-align: center">
+			</br></br>
+
+			<%= form_with scope: :rent, url: rents_path,local: true , class: "nifty_form" do |form| %>
+
+				<p>
+					<%= form.hidden_field :farmer_instrument_id , :value => @shows.id %>
+				</p>
+
+				<p>
+					<%= form.hidden_field :farmer_id , :value => current_farmer.id %>
+				</p>
+
+				<p>
+					<%= form.hidden_field :rent_per_hour , :value => @shows.rent_per_hour, :id => 'rentPerHour' %>
+				</p>
+				<p class="form-group">
+			    <%= form.label :from %><br>
+			    <%= form.date_field :from,:id => 'fromDate' %>
+			  </p>
+			  <p class="form-group">
+			    <%= form.label :to %><br>
+			    <%= form.date_field :to, :id => 'toDate' %>
+			  </p>
+
+				<p class="form-group">
+			    <%= form.submit %>
+			  </p>
 
 
-	</tr>
+
+			<% end %>
+			<p id = "result">Estimated Rent: Rs. </p>
 
 
-</table>
+			<!--<%= javascript_tag "displayClock()" %>-->
+
+			</form>
+
+
+		</div>
+
+	</div>
+</div>
+
+</div>
+
+</br></br> </br></br>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var days;
+		var fromDate;
+		var toDate;
+		var rentPerHour;
+		$('#fromDate,#toDate').change(function(){
+			fromDate = $("#fromDate").val();
+			toDate = $("#toDate").val();
+			var diff = new Date(Date.parse(toDate) - Date.parse(fromDate));
+			days = diff/1000/60/60/24;
+			rentPerHour = $('#rentPerHour').val()
+			$('#result').last().append(days * rentPerHour);
+		})
+
+
+
+
+
+	});
+
+
+
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@ gem 'faker'
 
 gem 'haml'
 gem 'devise'
-
+gem 'pundit'
 # Bundle edge Rails instead: gem 'rails', github: 'raigem 'carrierwave', '~> 2.0'ls/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.1'
 # Use sqlite3 as the database for Active Record

@@ -9,6 +9,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -22,68 +23,185 @@
 		font-family: 'Ubuntu', sans-serif;
 	}
 
+	button{
+		color: black;
+	}
+
+	div.card {
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+	}
+
 </style>
-
-<%=link_to 'Add New Adv', new_farmer_instrument_path%>
-
-<h1 style="color: #5f071d;font-family: 'IM Fell Great Primer SC', serif; text-align: center;">Farmer Instruments</h1>
-<table class="table">
-	<thead class="thead-dark">
-	<tr>
-		<th>Farmer Name</th>
-		<th>Instrument Name</th>
-		<th>Deposit</th>
-		<th>Rent</th>
-		<th>View Details</th>
-		<th>Edit Details</th>
-		<th>Delete</th>
-	</tr>
-	</thead>
-	<% @adds.each do |ad|%>
-	<tr>
-		<td><%=ad.farmer.first_name %></td>
-		<td><%=ad.instrument.instrument_name %></td>
-		<td><%=ad.deposit %></td>
-		<td><%=ad.rent_per_hour %></td>
-		<td><%=link_to 'View Info', farmer_instrument_path(ad.id)%></td>
-		<td><%=link_to 'Edit Info', edit_farmer_instrument_path(ad.id)%></td>
-		<td><%= link_to 'Delete Info', farmer_instrument_path(ad.id),
-             method: :delete,
-             data: { confirm: 'Are You sure?' } %></td>
-
-
-	</tr>
-	<% end %>
-
-</table>
-
-<% if false%>
-
-<table class="table">
-	<thead class="thead-dark">
-	<tr>
-		<th>Farmer Name</th>
-		<th>Instruments Owned</th>
-		<th>Instruments Rented</th>
-	</tr>
-	</thead>
-
-	<% @farm.each do |f|%>
-
-	<tr>
-		<td><%=f.full_name%></td>
-		<td><%=f.instruments.count%></td>
-		<td><%=f.rents.count%></td>
-
-	</tr>
-	<% end %>
-<br>
-<br>
 <br>
 
-</table>
 
-<% end %>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-6">
+			<h2 style="font-family: 'Poppins', sans-serif;">....Kisaan....</h2>
+		</div>
+		<div class="col-md-6">
+			<p class="navbar-text float-right">
+			<% if farmer_signed_in? %>
+			  Hey,  <strong><%= current_farmer.first_name %></strong>.
+				<button type="button" name="button" class = "btn btn-success"><%= link_to 'Add Instrument', new_instrument_path, :style => 'color:white;'%></button>
+			 <button type="button" name="button" class="btn btn-primary"><%= link_to 'Edit profile', edit_farmer_registration_path, :class => 'navbar-link', :style => 'color:white;'%></button>
+			 <button type="button" name="button" class="btn btn-dark"><%= link_to "Logout", destroy_farmer_session_path, method: :delete, :class => 'navbar-link', :style => 'color:white;' %> </button>
+
+			<% else %>
+			  <%= link_to "Sign up", new_farmer_registration_path, :class => 'navbar-link'  %> |
+			  <%= link_to "Login", new_farmer_session_path, :class => 'navbar-link'  %>
+			<% end %>
+			</p>
+		</div>
+	</div>
+</div>
+
+<br><br>
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+
+
+			<nav class="navba sticky-topr navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-brand">
+      <li class="nav-item active">
+        <a class="nav-link" href="#row1">Available Equipments <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#row2">Your Equipments</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#row3">Rented Equipments</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+</div>
+	</div>
+
+</div>
+
+</br></br>
+</br>
+<div class="container" id="row1">
+ <div class="row">
+	 <div class="col-md-12" style="text-align:center">
+		 <h3>Available Equipments</h3>
+ </div>
+
+
+<div class="container">
+	<div class="row">
+		<% @adds.where("farmer_id != ? AND is_available = ?",current_farmer.id, true).each do |ad|%>
+		<div class="col-md-4 z-depth-2">
+			<div class="card" style="width: 350px; height: 500px; text-align: center">
+			  <!--<img class="card-img-top" src="..." alt="Card image cap"> -->
+				<%= image_tag ad.instrument.image_url, width:350, height:200 %>
+			  <div class="card-body">
+			    <h5 class="card-title"><%= ad.instrument.instrument_name%></h5>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item"><span>Farmer Name </span> <br> <%= ad.farmer.full_name%></li>
+			    <li class="list-group-item"><span>Instrument Deposit</span><br> <%= ad.deposit%></li>
+			  </ul>
+			  <div class="card-body">
+			    <a href="#" class="card-link"><%= link_to 'Rent Now', farmer_instrument_path(ad.id)%></a>
+					<!--<a href="#" class="card-link"><%=link_to 'View Info', farmer_instrument_path(ad.id)%></a>
+					<a href="#" class="card-link"><%= link_to 'Delete Info', farmer_instrument_path(ad.id),
+		 							method: :delete,data: { confirm: 'Are You sure?' } %></a>-->
+			  </div>
+			</div>
+			<br>
+		</div>
+		<% end %>
+	</div>
+
+</div>
+
+</br></br>
+</br>
+<div class="container" id="row2">
+ <div class="row">
+	 <div class="col-md-12" style="text-align:center">
+		 <h3><%= current_farmer.first_name%> Equipments</h3>
+ 	</div>
+ </div>
+</div>
+<br>
+
+<div class="container">
+ <div class="row">
+	 <% @adds.where("farmer_id = #{current_farmer.id}").each do |ad|%>
+	 <div class="col-md-4 z-depth-2">
+		 <div class="card" style="width: 350px; height: 500px; text-align: center">
+			 <!--<img class="card-img-top" src="..." alt="Card image cap"> -->
+			 <%= image_tag ad.instrument.image_url, width:350, height:200 %>
+			 <div class="card-body">
+				 <h5 class="card-title"><%= ad.instrument.instrument_name%></h5>
+			 </div>
+			 <ul class="list-group list-group-flush">
+				 <li class="list-group-item"><span>Farmer Name </span> <br> <%= ad.farmer.full_name%></li>
+				 <li class="list-group-item"><span>Instrument Deposit</span><br> <%= ad.deposit%></li>
+			 </ul>
+			 <div class="card-body">
+				 <a href="#" class="card-link"><%= link_to 'Edit', edit_farmer_instrument_path(ad.id)%></a>
+				 <a href="#" class="card-link"><%=link_to 'View', farmer_instrument_path(ad.id)%></a>
+				 <a href="#" class="card-link"><%= link_to 'Delete', farmer_instrument_path(ad.id),
+								 method: :delete,data: { confirm: 'Are You sure?' } %></a>
+			 </div>
+		 </div>
+		 <br>
+	 </div>
+	 <% end %>
+ </div>
+
+
+</div>
+
+</br></br>
+</br>
+<div class="row" id="row3">
+	<div class="col-md-12" style="text-align:center">
+		<h3>Equipments Rented</h3>
+</div>
+
+
+<div class="container" >
+ <div class="row">
+	 <% @adds.where("farmer_id != ? AND is_available = ?",current_farmer.id, false).each do |ad|%>
+	 <div class="col-md-4 z-depth-2">
+		 <div class="card" style="width: 350px; height: 500px; text-align: center">
+			 <!--<img class="card-img-top" src="..." alt="Card image cap"> -->
+			 <%= image_tag ad.instrument.image_url, width:350, height:200 %>
+			 <div class="card-body">
+				 <h5 class="card-title"><%= ad.instrument.instrument_name%></h5>
+			 </div>
+			 <ul class="list-group list-group-flush">
+				 <li class="list-group-item"><span>Farmer Name </span> <br> <%= ad.farmer.full_name%></li>
+				 <li class="list-group-item"><span>Instrument Deposit</span><br> <%= ad.deposit%></li>
+			 </ul>
+			 <div class="card-body">
+				 <a href="#" class="card-link"><%= link_to 'Return', farmer_instrument_path(id: ad.id, flg: true), :method => :patch%></a>
+				 <!--<a href="#" class="card-link"><%=link_to 'View Info', farmer_instrument_path(ad.id)%></a>
+				 <a href="#" class="card-link"><%= link_to 'Delete Info', farmer_instrument_path(ad.id),
+								 method: :delete,data: { confirm: 'Are You sure?' } %></a>-->
+			 </div>
+		 </div>
+		 <br>
+	 </div>
+	 <% end %>
+ </div>
+
+</div>
+
 
 
 

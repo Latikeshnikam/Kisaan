@@ -15,6 +15,7 @@ class FarmerInstrumentsController < ApplicationController
 	end
 
 	def create
+		# pp permit_param
 		@advertise = FarmerInstrument.new(permit_param)
 		@advertise.save
 		redirect_to farmer_instrument_path(@advertise)
@@ -25,10 +26,16 @@ class FarmerInstrumentsController < ApplicationController
 	end
 
 	def update
-    	@update_form = FarmerInstrument.find(params[:id])
-    	@update_form.update(rent_per_hour: params[:farmer_instrument][:rent_per_hour],deposit: params[:farmer_instrument][:deposit],is_available: params[:farmer_instrument][:is_available],available_from: params[:farmer_instrument][:available_from],available_to: params[:farmer_instrument][:available_to])
-    	redirect_to farmer_instrument_path(@update_form	)
-    end
+			if (params[:flg])
+				@current= FarmerInstrument.find(params[:id])
+				@current.update(is_available: true)
+				redirect_to farmer_instruments_path
+			else
+	    	@update_form = FarmerInstrument.find(params[:id])
+	    	@update_form.update(rent_per_hour: params[:farmer_instrument][:rent_per_hour],deposit: params[:farmer_instrument][:deposit],is_available: params[:farmer_instrument][:is_available],available_from: params[:farmer_instrument][:available_from],available_to: params[:farmer_instrument][:available_to])
+	    	redirect_to farmer_instrument_path(@update_form	)
+		end
+  end
     def destroy
     	@find = FarmerInstrument.find(params[:id])
     	@find.destroy

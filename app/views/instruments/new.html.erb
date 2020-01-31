@@ -1,6 +1,9 @@
-<h1>Add New Advertisement.</h1>
+<h1>Add New Instruments.</h1>
 <%= form_with scope: :instrument, url: instruments_path,local: true , class: "nifty_form" do |form| %>
 
+  <p>
+    <%= form.hidden_field :farmer_id , :value => current_farmer.id %>
+  </p>
   <p>
     <%= form.label :instrument_name %><br>
     <%= form.text_field :instrument_name %>
@@ -9,6 +12,7 @@
     <%= form.label :brand %><br>
     <%= form.text_field :brand %>
   </p>
+
   <p>
     <%= form.label :specification %><br>
     <%= form.text_field :specification %>

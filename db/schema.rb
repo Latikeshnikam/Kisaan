@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_27_073343) do
+ActiveRecord::Schema.define(version: 2020_01_28_082735) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "line_1"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_01_27_073343) do
   create_table "farmer_instruments", force: :cascade do |t|
     t.integer "farmer_id"
     t.integer "instrument_id"
-    t.integer "rent_per_hour", null: false
+    t.integer "rent_per_hour"
     t.boolean "is_available"
     t.integer "deposit"
     t.date "available_from"
@@ -46,6 +46,12 @@ ActiveRecord::Schema.define(version: 2020_01_27_073343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "email"
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_farmers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_farmers_on_reset_password_token", unique: true
   end
 
   create_table "instruments", force: :cascade do |t|
