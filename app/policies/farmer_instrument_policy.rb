@@ -1,5 +1,3 @@
 class FarmerInstrumentPolicy < ApplicationPolicy
-  def update?
-      farmer.admin?
-  end
+  farmer == farmer_instrument
 end
